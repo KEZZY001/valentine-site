@@ -142,6 +142,21 @@ button:hover{transform:scale(1.05);}
 
 .floating-heart{position:absolute;color:rgba(255,77,109,0.4);font-size:20px;animation:float 6s linear infinite;z-index:-1;user-select:none;}
 @keyframes float{to{transform:translateY(-100vh);opacity:0;}}
+
+    .option-img {
+    width: 100%;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    transition: transform 0.25s ease;
+}
+
+.option-card:hover .option-img {
+    transform: scale(1.04);
+}
+
 </style>
 </head>
 <body>
@@ -172,7 +187,7 @@ button:hover{transform:scale(1.05);}
         <img src="Photo2.jpeg" class="memory-photo" alt="Photo 3">
         <img src="Photo5.jpeg" class="memory-photo" alt="Photo 4">
     </div>
-    <p class="love-message">"You make every single day brighter just by being in it.<br>I love you so much baby♥️"</p>
+    <p class="love-message">"You make every single day brighter just by being in it.<br>I love you so much baby♥️♥️"</p>
     <div class="playlist">
         <h3>Our Songs 🎵</h3>
         <div class="song-item" onclick="togglePlay(this, 'song1')"><div class="song-info"><span class="song-title">Love</span><span class="song-artist">Burna Boy</span></div><div class="play-icon">▶</div></div>
@@ -187,11 +202,29 @@ button:hover{transform:scale(1.05);}
 <h1>Pick the food:</h1>
 <p>What's your pick today?</p>
 <div class="options-grid">
-<div class="option-card" onclick="selectOption(this,'food')"><span class="option-emoji">🍨</span><span class="option-label">Ice Cream</span></div>
-<div class="option-card" onclick="selectOption(this,'food')"><span class="option-emoji">🍣</span><span class="option-label">Sushi</span></div>
-<div class="option-card" onclick="selectOption(this,'food')"><span class="option-emoji">🌮</span><span class="option-label">Kibandaski</span></div>
-<div class="option-card" onclick="selectOption(this,'food')"><span class="option-emoji">🍗</span><span class="option-label">Fried Chicken</span></div>
+
+  <div class="option-card" onclick="selectOption(this,'food')">
+    <img src="icecream.jpg" class="option-img">
+    <span class="option-label">Ice Cream</span>
+  </div>
+
+  <div class="option-card" onclick="selectOption(this,'food')">
+    <img src="sushi.jpg" class="option-img">
+    <span class="option-label">Sushi</span>
+  </div>
+
+  <div class="option-card" onclick="selectOption(this,'food')">
+    <img src="kibandaski.jpg" class="option-img">
+    <span class="option-label">Kibandaski</span>
+  </div>
+
+  <div class="option-card" onclick="selectOption(this,'food')">
+    <img src="friedchicken.jpg" class="option-img">
+    <span class="option-label">Open Choice</span>
+  </div>
+
 </div>
+
 <button onclick="nextStep(4)">Next ></button>
 </div>
 
@@ -260,6 +293,7 @@ overlay.addEventListener('click',e=>{if(e.target===overlay) overlay.style.displa
 </script>
 </body>
 </html
+
 
 
 
