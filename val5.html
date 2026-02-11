@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        /* --- RESET & BASIC STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: #ffe6e6; 
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #ffd1ff);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- THE CARD CONTAINER --- */
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            width: 100%;
+            max-width: 450px; 
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        
+       /* --- GIF / IMAGE AREA --- */
+.gif-area {
+    width: 100%;
+    max-width: 400px;           /* Keeps it neat on large screens */
+    margin: 20px auto;          /* Center horizontally with spacing */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1); /* Subtle glass-like background */
+    backdrop-filter: blur(8px);           /* Soft frosted effect */
+    border-radius: 25px;                  /* Smooth rounded corners */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15); /* Soft floating shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover / Focus Effect */
+.gif-area:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 25px 40px rgba(0,0,0,0.25);
+}
+
+/* The Image Itself */
+.gif-area img {
+    width: 100%;
+    height: auto;
+    max-height: 350px;
+    object-fit: cover;  /* Fills nicely without stretching */
+    border-radius: 20px;
+    border: 3px solid rgba(255,255,255,0.2); /* Subtle highlight */
+    box-shadow: 0 8px 15px rgba(0,0,0,0.1); /* Soft inner depth */
+    transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+/* Optional Hover on Image for extra vibe */
+.gif-area img:hover {
+    transform: scale(1.03);
+    filter: brightness(1.05);
+}
+
+/* --- MEMORY GRID --- */
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+/* Base Image Style */
+.memory-photo {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    transition: 
+        transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.35s ease,
+        border-radius 0.35s ease;
+    cursor: zoom-in;
+    position: relative;
+    background: #f5f5f7;
+}
+
+/* Fullscreen Zoom */
+.memory-photo:hover {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+
+    width: 92vw;
+    height: 92vh;
+
+    object-fit: contain;
+    border-radius: 22px;
+
+    transform: scale(1);
+    z-index: 9999;
+    cursor: zoom-out;
+
+    box-shadow: 
+        0 40px 80px rgba(0,0,0,0.25),
+        0 0 0 100vmax rgba(0,0,0,0.55);
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+    .memory-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .memory-photo:hover {
+        width: 96vw;
+        height: 88vh;
+        border-radius: 18px;
+    }
+}
+
+
+        .love-message {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.3rem;
+            color: #ff4d6d;
+            margin: 20px 0;
+            line-height: 1.4;
+        }
+
+        /* --- PLAYLIST STYLES --- */
+        .playlist {
+            background: #fff0f3;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        .playlist h3 {
+            font-size: 0.9rem;
+            color: #ff4d6d;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 900;
+        }
+        .song-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .song-item:hover { transform: scale(1.02); }
+        .song-info { display: flex; flex-direction: column; }
+        .song-title { font-weight: 700; font-size: 0.9rem; color: #444; }
+        .song-artist { font-size: 0.75rem; color: #888; }
+        .play-icon { 
+            color: #ff4d6d; 
+            font-size: 0.8rem; 
+            background: #ffe6e6;
+            width: 30px; height: 30px;
+            display: flex; justify-content: center; align-items: center;
+            border-radius: 50%;
+        }
+
+        /* --- TEXT --- */
+        h1 { color: #ff4d6d; margin-bottom: 10px; font-weight: 900; font-size: 1.8rem;}
+        p { color: #888; margin-bottom: 30px; font-size: 1rem; line-height: 1.5; }
+
+        /* --- BUTTONS --- */
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+            position: relative;
+            height: 50px; 
+        }
+
+        button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-size: 1rem;
+            background: #ff4d6d;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
+        }
+        button:hover { transform: scale(1.05); }
+
+        .btn-no {
+            background: #f0f0f0;
+            color: #555;
+            box-shadow: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- SELECTION GRIDS --- */
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .option-card {
+            background: #fff;
+            border: 2px solid #eee;
+            border-radius: 15px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option-card:hover { border-color: #ff4d6d; transform: translateY(-3px); }
+        .option-card.selected { background: #fff0f3; border-color: #ff4d6d; }
+        .option-emoji { font-size: 2rem; display: block; margin-bottom: 5px; }
+        .option-label { font-size: 0.9rem; font-weight: 700; color: #555; }
+
+        /* --- SCREENS MANAGEMENT --- */
+        .step { display: none; animation: fadeIn 0.5s ease; }
+        .step.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- FLOATING HEARTS BG --- */
+        .floating-heart {
+            position: absolute;
+            color: rgba(255, 77, 109, 0.4);
+            font-size: 20px;
+            animation: float 6s linear infinite;
+            z-index: -1;
+            user-select: none;
+        }
+        @keyframes float { to { transform: translateY(-100vh); opacity: 0;} }
+    </style>
+</head>
+<body>
+
+    <audio id="bg-music" loop>
+        <source src="bg.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="song1"> <source src="bg.mp3" type="audio/mpeg"> </audio>
+    <audio id="song2"> <source src="justadream.mp3" type="audio/mpeg"> </audio>
+    <audio id="song3"> <source src="SayYouWon'tLetGo.mp3" type="audio/mpeg"> </audio>
+
+    <div class="card">
+        
+        <div id="step1" class="step active">
+            <div class="gif-area">
+                <img src="snd1.jpeg" alt="Main Photo">
+            </div>
+            <h1>Will you be my Valentine?</h1>
+            
+            <button onclick="startBackgroundMusic()" style="background:none; border:none; color:#ff4d6d; font-size:0.8rem; margin-bottom:10px; cursor:pointer;">
+                Tap here for music 🎵
+            </button>
+
+            <div class="btn-container">
+                <button onclick="nextStep(2); startBackgroundMusic();">YES ❤️</button>
+                <button class="btn-no" id="noBtn" onmouseover="moveNoButton()" ontouchstart="moveNoButton()">NO</button>
+            </div>
+        </div>
+
+        <div id="step2" class="step">
+            <h1>Us ❤️</h1>
+            
+            <div class="memory-grid">
+                <img src="PhotoI.jpeg" class="memory-photo" alt="Photo 1">
+                <img src="Photo3.jpeg" class="memory-photo" alt="Photo 2">
+                <img src="Photo2.jpeg" class="memory-photo" alt="Photo 3">
+                <img src="Photo5.jpeg" class="memory-photo" alt="Photo 4">
+            </div>
+            
+            <p class="love-message">
+                "You make every single day brighter just by being in it."
+            </p>
+
+            <div class="playlist">
+                <h3>Our Songs 🎵</h3>
+                
+                <div class="song-item" onclick="togglePlay(this, 'song1')">
+                    <div class="song-info">
+                        <span class="song-title">Just a Dream</span>
+                        <span class="song-artist">Nelly</span>
+                    </div>
+                    <div class="play-icon">▶</div>
+                </div>
+
+                <div class="song-item" onclick="togglePlay(this, 'song2')">
+                    <div class="song-info">
+                        <span class="song-title">Love</span>
+                        <span class="song-artist">Burna Boy</span>
+                    </div>
+                    <div class="play-icon">▶</div>
+                </div>
+
+                <div class="song-item" onclick="togglePlay(this, 'song3')">
+                    <div class="song-info">
+                        <span class="song-title">Say You Won't Let Go</span>
+                        <span class="song-artist">James Arthur</span>
+                    </div>
+                    <div class="play-icon">▶</div>
+                </div>
+            </div>
+
+            <p style="font-size: 0.9rem;">(Okay, now let's plan the details...)</p>
+            <button onclick="nextStep(3)">Plan Date ></button>
+        </div>
+
+        <div id="step3" class="step">
+            <h1>Pick the food:</h1>
+            <p>What's your pick today?</p>
+            
+            <div class="options-grid">
+                <div class="option-card" onclick="selectOption(this, 'food')">
+                    <span class="option-emoji">🍨</span>
+                    <span class="option-label">Ice Cream</span>
+                </div>
+                <div class="option-card" onclick="selectOption(this, 'food')">
+                    <span class="option-emoji">🍣</span>
+                    <span class="option-label">Sushi</span>
+                </div>
+                <div class="option-card" onclick="selectOption(this, 'food')">
+                    <span class="option-emoji">🌮</span>
+                    <span class="option-label">Kibandaski</span>
+                </div>
+                <div class="option-card" onclick="selectOption(this, 'food')">
+                    <span class="option-emoji">🍗</span>
+                    <span class="option-label">Fried Chicken</span>
+                </div>
+            </div>
+            <button onclick="nextStep(4)">Next ></button>
+        </div>
+
+        <div id="step4" class="step">
+            <h1>Pick an activity:</h1>
+            <p>What's the vibe?</p>
+            
+            <div class="options-grid">
+                <div class="option-card" onclick="selectOption(this, 'activity')">
+                    <span class="option-emoji">🎬</span>
+                    <span class="option-label">Movies</span>
+                </div>
+                <div class="option-card" onclick="selectOption(this, 'activity')">
+                    <span class="option-emoji">🎳</span>
+                    <span class="option-label">Bowling<br> Arcade </span>
+                </div>
+                <div class="option-card" onclick="selectOption(this, 'activity')">
+                    <span class="option-emoji">☕</span>
+                    <span class="option-label">Coffee Date</span>
+                </div>
+                <div class="option-card" onclick="selectOption(this, 'activity')">
+                    <span class="option-emoji">♣️</span>
+                    <span class="option-label">Board Games/ <br>Card Games</span>
+                </div>
+            </div>
+            <button onclick="finish()">Finish ></button>
+        </div>
+
+        <div id="step5" class="step">
+            <div class="gif-area">
+                <img src="fffn.png" alt="Happy">
+            </div>
+            <h1>It's a Date!</h1>
+            <p>See you on Feb 14th.</p>
+            <p style="font-size: 0.9rem; background: #fff0f3; padding: 10px; border-radius: 10px; color: #ff4d6d;">
+                <strong>Plan:</strong> <span id="summary">Surprise!</span>
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        // --- AUDIO ENGINE ---
+        const bgMusic = document.getElementById('bg-music');
+        let currentSong = null;
+
+        function startBackgroundMusic() {
+            // Check if BG music is already playing
+            if (bgMusic.paused) {
+                bgMusic.volume = 0.5;
+                bgMusic.play().catch(error => {
+                    console.log("Audio play failed (usually waiting for interaction): ", error);
+                });
+            }
+        }
+
+        function togglePlay(element, songId) {
+            const audio = document.getElementById(songId);
+            const icon = element.querySelector('.play-icon');
+
+            // 1. If clicking the currently playing song
+            if (currentSong === audio && !audio.paused) {
+                audio.pause();
+                icon.innerText = "▶";
+                // Resume background music
+                bgMusic.play();
+            } 
+            // 2. If clicking a new song
+            else {
+                // Stop whatever is playing (song or bg)
+                if (currentSong) {
+                    currentSong.pause();
+                    currentSong.currentTime = 0;
+                }
+                bgMusic.pause();
+
+                // Reset all icons
+                document.querySelectorAll('.play-icon').forEach(el => el.innerText = "▶");
+
+                // Play new song
+                audio.play();
+                currentSong = audio;
+                icon.innerText = "⏸";
+            }
+        }
+
+        // --- NAVIGATION & GAME LOGIC ---
+        let selections = {
+            food: 'Anything',
+            activity: 'Anything'
+        };
+
+        function nextStep(id) {
+            document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+            document.getElementById('step' + id).classList.add('active');
+        }
+
+        const noBtn = document.getElementById('noBtn');
+        const noTexts = ["Are you sure?","Usikuwe hivyo", "Really?", "Don't do this!", "Mtoto mjinga😂!", "Please?", "💔"];
+        
+        function moveNoButton() {
+            const textIndex = Math.floor(Math.random() * noTexts.length);
+            noBtn.innerText = noTexts[textIndex];
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+        }
+
+        function selectOption(element, category) {
+            element.parentElement.querySelectorAll('.option-card').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selections[category] = element.querySelector('.option-label').innerText;
+        }
+
+        function finish() {
+            document.getElementById('summary').innerText = `We are eating ${selections.food} and going for ${selections.activity}!`;
+            nextStep(5);
+            createHearts();
+        }
+
+        function createHearts() {
+            const colors = ['#ff4d6d', '#ff758f', '#ffb3c1'];
+            for (let i = 0; i < 50; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.innerText = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+                heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+                heart.style.top = '100vh';
+                document.body.appendChild(heart);
+            }
+        }
+    </script>
+</body>
+</html>
