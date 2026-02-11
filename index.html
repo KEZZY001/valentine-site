@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For You ❤️</title>
+<title>For You,Sandy❤️</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&family=Pacifico&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -46,7 +46,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: 2px;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(8px);
     border-radius: 25px;
@@ -157,6 +157,20 @@ button:hover{transform:scale(1.05);}
     transform: scale(1.04);
 }
 
+.love-message {
+    width: 370px;
+    padding: 18px;
+    background-color: #efe3e6;
+    border-radius: 15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
+    margin: 50px auto;
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+    font-size: 1.3rem;
+    color: #ff4d6d;
+    margin: 20px 0;
+    line-height: 1.4;
+}
 </style>
 </head>
 <body>
@@ -189,7 +203,7 @@ button:hover{transform:scale(1.05);}
         <img src="Photo2.jpeg" class="memory-photo" alt="Photo 3">
         <img src="Photo5.jpeg" class="memory-photo" alt="Photo 4">
     </div>
-    <p class="love-message">"You make every single day brighter just by being in it.<br>I love you so much baby♥️♥️"</p>
+    <div class="love-message">Hey my love,<br>I just feel like you needed to hear this.<br>I am so lucky to have you in my life, to love you<br>I hope you never forget how much you mean to me.<br>I want you to know that you are cherished, valued, and loved beyond measure<br>You make every single day brighter<br> just by being in it.<br>I love you so much baby♥️♥️"</div>
     <div class="playlist">
         <h3>Our Songs 🎵</h3>
         <div class="song-item" onclick="togglePlay(this, 'song1')"><div class="song-info"><span class="song-title">Love</span><span class="song-artist">Burna Boy</span></div><div class="play-icon">▶</div></div>
@@ -317,7 +331,6 @@ overlay.addEventListener('click',e=>{if(e.target===overlay) overlay.style.displa
 </script>
 </body>
 </html>
-
 
 
 
